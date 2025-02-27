@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { TrackModel } from '../../../core/models/tracks.model';
 
 @Component({
   selector: 'app-media-player',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './media-player.component.css'
 })
 export class MediaPlayerComponent {
-
+  mockCover: TrackModel = {
+    cover: 'blablabla.png',
+    album: 'Seventh Son of a Seventh Son',
+    name: 'Iron Maiden',
+    url: 'https://www.youtube.com/watch?v=7jTgkTEDDog',
+    _id: '1',
+  }
 }
