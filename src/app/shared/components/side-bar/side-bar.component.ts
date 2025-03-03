@@ -65,4 +65,8 @@ export class SideBarComponent {
     ]
   }
 
+  // goTo($event: any): void {
+  //   this.router.navigate($event.router);
+  // }
+
 }
