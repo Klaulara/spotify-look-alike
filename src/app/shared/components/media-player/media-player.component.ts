@@ -15,7 +15,7 @@ export class MediaPlayerComponent {
     album: 'Seventh Son of a Seventh Son',
     name: 'Iron Maiden',
     url: 'https://www.youtube.com/watch?v=7jTgkTEDDog',
-    _id: '1',
+    _id: 1,
   }
 
   listObservers$: Array<Subscription> = [];

@@ -11,7 +11,7 @@ import { MultimediaService } from '@shared/services/multimedia.service';
 export class CardPlayerComponent {
   @Input() mode: 'small' | 'large' = 'small';
   @Input() track: TrackModel = {
-    _id: '',
+    _id: 0,
     name: '',
     album: '',
     cover: '',
