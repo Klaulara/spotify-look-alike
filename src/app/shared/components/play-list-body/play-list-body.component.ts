@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import * as dataRaw from '../../../data/tracks.json';
 
 @Component({
   selector: 'app-play-list-body',
@@ -13,6 +14,8 @@ export class PlayListBodyComponent {
   constructor() { }
 
   ngOnInit() {
+    const {data}: any = (dataRaw as any).default;
+    this.tracks = data;
 
   }
   changeSort(property:string): void {

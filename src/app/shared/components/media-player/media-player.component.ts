@@ -10,29 +10,31 @@ import { Subscription } from 'rxjs';
   styleUrl: './media-player.component.css'
 })
 export class MediaPlayerComponent {
-  mockCover: TrackModel = {
-    cover: 'blablabla.png',
-    album: 'Seventh Son of a Seventh Son',
-    name: 'Iron Maiden',
-    url: 'https://www.youtube.com/watch?v=7jTgkTEDDog',
-    _id: 1,
-  }
-
+  @ViewChild('progressBar') progressBar: ElementRef = new ElementRef(null);
   listObservers$: Array<Subscription> = [];
+  state: string = "paused";
 
-  constructor(private multimediaService: MultimediaService) { }
+  constructor(public multimediaService: MultimediaService) { }
 
   ngOnInit(): void {
-    const observer1$: Subscription = this.multimediaService.callback.subscribe(
-      (response: TrackModel) => {
-        console.log(response);
-      }
-    )
-    this.listObservers$.push(observer1$);
+    const observer1$ = this.multimediaService.playerStatus$
+      .subscribe((status: string) => {
+        this.state = status;
+      });
+    this.listObservers$ = [observer1$];
   }
   ngOnDestroy(): void {
     this.listObservers$.forEach((observer: Subscription) => {
       observer.unsubscribe();
     });
+  }
+
+  handlePosition(event: MouseEvent): void {
+    const elNative: HTMLElement = this.progressBar.nativeElement;
+    const { clientX } = event;
+    const { x, width } = elNative.getBoundingClientRect();
+    const clickX = clientX - x;
+    const percentageFromX = (clickX * 100)/ width;
+    this.multimediaService.seekAudio(percentageFromX);
   }
 }
